@@ -8,7 +8,9 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.StringTokenizer;
 
 import javax.swing.*;
@@ -93,12 +95,15 @@ public void connection() {
 	    	ip=st.nextToken();
 	    	port=st.nextToken();
 	    }
-	    
-			s = new Socket(ip,(Integer.parseInt(port)));
+	    SocketAddress socketAddress = new InetSocketAddress(ip,Integer.parseInt(port));
+			s = new Socket();
+			try{
+				s.connect(socketAddress,1000);
+			}catch (Exception ex){}
 			out = new ObjectOutputStream(s.getOutputStream());
 			in = new ObjectInputStream(s.getInputStream());
 		} catch (Exception ex) {
-			
+			System.out.println(ex.getMessage());
 			try {
 				Thread.sleep(5);
 			} catch (InterruptedException e) {

@@ -149,6 +149,8 @@ public class LoginWindowPanel extends JPanel implements ActionListener,KeyListen
 			
 			System.out.println(login_info);
 			BssNetWork.getInst().sendMessage(BssProtocol.LOGIN_CHECK,login_info);
+
+			
 			while(true){
 				if(login_check!=null){
 					break;
